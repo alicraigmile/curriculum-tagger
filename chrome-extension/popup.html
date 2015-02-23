@@ -37,6 +37,8 @@ line-height: 1.5em;
 #subject-image-fav-icon { position: relative; left: 8px; top: 16px; z-index: 1;}
 #subject-title { margin-left: 64px; }
 #subject-url { margin-left: 64px; }
+
+#tag-button { font-size: 2rem; }
     </style>
 
     <!--
@@ -80,7 +82,7 @@ line-height: 1.5em;
 	<label><input type="radio" name="object" value="gcse" checked>&nbsp;GCSE</label><br>
 	<label><input type="radio" name="object" value="functional-skills">&nbsp;Functional Skills</label><br>
     </div>
-    <input type="submit" value="Tag it!" id="tag-button">
+    <input type="submit" value="Tag it!" id="tag-button" disabled>
     <div id="status"></div>
     <img id="image-result" hidden>
   </body>

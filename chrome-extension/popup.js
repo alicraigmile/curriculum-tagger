@@ -111,6 +111,15 @@ document.addEventListener('DOMContentLoaded', function() {
       imageFavIcon.hidden = false;
    }
 
+   document.getElementById('tag-button').disabled = false;
+
+	document.getElementById('tag-button').addEventListener('click', function(e) {
+  	document.body.style.backgroundColor = "red";
+	//	alert('click');
+	});
+
+
+
     // Put the image URL in Google search.
     renderStatus('Performing Google Image search for ' + url);
 
