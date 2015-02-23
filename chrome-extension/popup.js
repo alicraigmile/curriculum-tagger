@@ -115,12 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	document.getElementById('tag-button').addEventListener('click', function(e) {
   	document.body.style.backgroundColor = "red";
-	//	alert('click');
-	});
 
-
-
-    // Put the image URL in Google search.
+   // Put the image URL in Google search.
     renderStatus('Performing Google Image search for ' + url);
 
     getImageUrl(url, function(imageUrl, width, height) {
@@ -140,5 +136,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }, function(errorMessage) {
       renderStatus('Cannot display image. ' + errorMessage);
     });
-  });
+
+
+	});
+
+
+
+   });
 });
