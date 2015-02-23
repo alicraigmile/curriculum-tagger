@@ -8,7 +8,7 @@
  * @param {function(string)} callback - called when the URL of the current tab
  *   is found.
  **/
-function getCurrentTabUrl(callback) {
+function getCurrentTabDetails(callback) {
   // Query filter to be passed to chrome.tabs.query - see
   // https://developer.chrome.com/extensions/tabs#method-query
   var queryInfo = {
@@ -27,14 +27,18 @@ function getCurrentTabUrl(callback) {
     // A tab is a plain object that provides information about the tab.
     // See https://developer.chrome.com/extensions/tabs#type-Tab
     var url = tab.url;
+    var title = tab.title;
+    var favIconUrl = tab.favIconUrl;
 
     // tab.url is only available if the "activeTab" permission is declared.
     // If you want to see the URL of other tabs (e.g. after removing active:true
     // from |queryInfo|), then the "tabs" permission is required to see their
     // "url" properties.
     console.assert(typeof url == 'string', 'tab.url should be a string');
+    console.assert(typeof title == 'string', 'tab.title should be a string');
+    console.assert(typeof favIconUrl == 'string', 'tab.favIconUrl should be a string');
 
-    callback(url);
+    callback(url,title,favIconUrl);
   });
 
   // Most methods of the Chrome extension APIs are asynchronous. This means that
@@ -93,7 +97,20 @@ function renderStatus(statusText) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  getCurrentTabUrl(function(url) {
+
+  getCurrentTabDetails(function(url,title,favIconUrl) {
+
+   document.getElementById('subject-url').textContent = url;
+   document.getElementById('subject-title').textContent = title;
+
+   if (favIconUrl) {
+       var imageFavIcon = document.getElementById('subject-image-fav-icon');
+        imageFavIcon.width = 32;
+        imageFavIcon.height = 32;
+        imageFavIcon.src = favIconUrl;
+        imageFavIcon.hidden = false;
+   }
+
     // Put the image URL in Google search.
     renderStatus('Performing Google Image search for ' + url);
 

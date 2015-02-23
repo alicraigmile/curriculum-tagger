@@ -30,6 +30,31 @@
     <script src="popup.js"></script>
   </head>
   <body>
+    <div id="subject">
+        <h2>Tagging</h2>
+	<img id="subject-image-fav-icon" hidden>
+        <div id="subject-title"></div>
+        <div id="subject-url"></div>
+        <hr />
+    </div>
+    <div id="predicate">
+	This page:<br>
+	<label>
+	<input type="radio" name="predicate" value="mentions" checked>&nbsp;mentions<br>
+	</label>
+	<label>
+	<input type="radio" name="predicate" value="about">&nbsp;is about
+	</label>
+        <hr>
+    </div>
+    <div id="object">
+	<label><input type="radio" name="object" value="ks1">&nbsp;KS1</label><br>
+	<label><input type="radio" name="object" value="ks2">&nbsp;KS2</label><br>
+	<label><input type="radio" name="object" value="ks3">&nbsp;KS3</label><br>
+	<label><input type="radio" name="object" value="gcse" checked>&nbsp;GCSE</label><br>
+	<label><input type="radio" name="object" value="functional-skills">&nbsp;Functional Skills</label><br>
+    </div>
+    <input type="submit" value="Tag it!" id="tag-button">
     <div id="status"></div>
     <img id="image-result" hidden>
   </body>
