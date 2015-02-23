@@ -17,6 +17,12 @@ get '/posts' do
     erb :posts
 end
 
+get '/posts/:id' do
+    @post = Post.find_by(id: params[:id])
+    pass unless @post
+    erb :post
+end
+
 get "/version" do
     @version = '1.0'
     erb :version
