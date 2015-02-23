@@ -1,2 +1,2 @@
-app/*.sqlite.db
+app/*.sqlite3.db
 app/Gemfile.lock
