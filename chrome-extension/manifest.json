@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+
+  "name": "Curriculum tagger",
+  "description": "This extension allows you to tag the current page as to how it maps to the UK Curricula.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Tag against the UK Curricula"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
