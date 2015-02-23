@@ -24,7 +24,8 @@ get '/posts/:id' do
 end
 
 get "/version" do
-    @version = '1.0'
+    #@version = '1.0'
+    @version = `git rev-parse --short HEAD`
     erb :version
 end
 
