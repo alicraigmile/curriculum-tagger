@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         imageFavIcon.width = 32;
         imageFavIcon.height = 32;
         imageFavIcon.src = favIconUrl;
-        imageFavIcon.hidden = false;
+      imageFavIcon.hidden = false;
    }
 
     // Put the image URL in Google search.

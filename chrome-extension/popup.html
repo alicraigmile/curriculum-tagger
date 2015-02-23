@@ -11,6 +11,7 @@
       body {
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
         font-size: 100%;
+line-height: 1.5em;
       }
       #status {
         /* avoid an excessively wide status text */
@@ -19,6 +20,23 @@
         overflow: hidden;
         max-width: 400px;
       }
+	.dc img {
+		float: left; margin-right: 8px;	position: absolute; }
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+.cf:after {
+    clear: both;
+}
+#subject-details { margin-bottom: 16px; }
+#subject-title {font-weight: bold; }
+#subject-url {font-size: x-small;}
+
+#subject-image-fav-icon { position: relative; left: 8px; top: 16px; z-index: 1;}
+#subject-title { margin-left: 64px; }
+#subject-url { margin-left: 64px; }
     </style>
 
     <!--
@@ -32,9 +50,17 @@
   <body>
     <div id="subject">
         <h2>Tagging</h2>
-	<img id="subject-image-fav-icon" hidden>
-        <div id="subject-title"></div>
-        <div id="subject-url"></div>
+	
+	<div id="subject-details" class="cf">
+		<div class="dc">
+			<img src="document.png" width="48" height="56">
+			<img id="subject-image-fav-icon" src="icon.png" width="32" height="32" hidden>
+			<!--<img id="subject-image-fav-icon" hidden>-->
+       		 </div>
+
+        	<div id="subject-title">Page title here</div>
+        	<div id="subject-url">null://</div>
+        </div>
         <hr />
     </div>
     <div id="predicate">
