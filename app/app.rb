@@ -48,8 +48,7 @@ get '/images/search' do
       content_type 'text/plain'
       error 406, "Not Acceptable" 
     }
-    
-    
+  end
 end
 
 get "/ping" do
