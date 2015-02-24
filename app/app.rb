@@ -9,7 +9,7 @@ get "/" do
 end
 
 get "/ping" do
-    erb :ping
+    erb :ping, :content_type => 'text/plain'
 end
 
 get '/posts' do
@@ -26,7 +26,7 @@ end
 get "/version" do
     #@version = '1.0'
     @version = `git rev-parse --short HEAD`
-    erb :version
+    erb :version, :content_type => 'text/plain'
 end
 
 # creates a new beer with posted parameters and returns the newly created beer as a JSON response.
