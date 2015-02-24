@@ -8,6 +8,12 @@ get "/" do
     erb :apidocs
 end
 
+get '/images/search' do
+  # matches "GET /images/search?q=volcanos"
+  @images = [{:width => 56, :height => 48, :url => '/images/document.svg'}]
+  erb :imagesearch
+end
+
 get "/ping" do
     erb :ping, :content_type => 'text/plain'
 end
@@ -18,7 +24,7 @@ get '/posts' do
 end
 
 get '/posts/:id' do
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find_by(:id => params[:id])
     pass unless @post
     erb :post
 end

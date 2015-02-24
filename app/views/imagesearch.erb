@@ -1,0 +1,7 @@
+<h1>Images</h1>
+<% for image in @images %>
+  <img src="<%= image[:url] %>" width="<%= image[:width] %>" height="<%= image[:height] %>">
+  <p>url: <%= image[:url] %></p>
+  <p>width: <%= image[:width] %></p>
+  <p>height: <%= image[:height] %></p>
+<% end %>
