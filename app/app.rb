@@ -28,21 +28,3 @@ get "/version" do
     @version = `git rev-parse --short HEAD`
     erb :version, :content_type => 'text/plain'
 end
-
-# creates a new beer with posted parameters and returns the newly created beer as a JSON response.
-post "/beers" do
-    Beer.create(params[:beer]).to_json
-end
-     
-# finds the beer to be updated, updates beer attributes with the posted parameters and returns the updated beer as a JSON response.
-puts "/beers/:id" do
-    @beer = Beer.find(params[:id])
-    @beer.update_attributes(params[:beer]).to_json
-end
-     
-# finds the beer to be destroyed, destroys it returns a 204 response.
-delete "/beers/:id" do
-    @beer = Beer.find(params[:id])
-    @beer.destroy
-    status 204
-end
