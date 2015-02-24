@@ -1,7 +1,7 @@
 require 'rubygems'
 libs = File.expand_path("vendor/bundle/gems/**/lib", __FILE__)
 $LOAD_PATH.unshift *Dir.glob(libs)
-$LOAD_PATH.unshift File.dirname(__FILE__)
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/lib'
 
 require 'sinatra'
 require 'rack/conneg'
