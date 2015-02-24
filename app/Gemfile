@@ -7,5 +7,5 @@ gem '4store-ruby', :git => 'https://github.com/moustaki/4store-ruby'
 gem 'builder'         #for XML views
 gem 'json'            #for JSON views
 gem 'rack'
-gem 'rack/conneg', :git => 'https://github.com/md5/rack-conneg'
+gem 'rack-conneg', :git => 'https://github.com/md5/rack-conneg'
 

@@ -1,17 +1,55 @@
 require 'rubygems'
-require 'sinatra'
+libs = File.expand_path("vendor/bundle/gems/**/lib", __FILE__)
+$LOAD_PATH.unshift *Dir.glob(libs)
+$LOAD_PATH.unshift File.dirname(__FILE__)
 
-$:.unshift File.dirname(__FILE__)
+require 'sinatra'
+require 'rack/conneg'
+
 require 'posts'
-     
+
+use(Rack::Conneg) { |conneg|
+  conneg.set :accept_all_extensions, false
+  conneg.set :fallback, :html
+  conneg.ignore_contents_of(File.join(File.dirname(__FILE__),'public'))
+  conneg.provide([:json, :xml])
+}
+ 
+before do
+  if negotiated?
+    content_type negotiated_type
+  end
+end
+    
 get "/" do
     erb :apidocs
+end
+
+get '/hello' do
+  response = { :message => 'Hello, World!' }
+  respond_to do |wants|
+    wants.json  { response.to_json         }
+    wants.xml   { response.to_xml          }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+  end
 end
 
 get '/images/search' do
   # matches "GET /images/search?q=volcanos"
   @images = [{:width => 56, :height => 48, :url => '/images/document.svg'}]
-  erb :imagesearch
+  respond_to do |wants|
+    wants.json  { @images.to_json }
+    wants.xml   { builder :imagesearch }
+    wants.html   { erb :imagesearch }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+    
+    
 end
 
 get "/ping" do
