@@ -12,12 +12,12 @@ use(Rack::Conneg) { |conneg|
   conneg.set :accept_all_extensions, false
   conneg.set :fallback, :html
   conneg.ignore_contents_of(File.join(File.dirname(__FILE__),'public'))
-  conneg.provide([:json, :xml])
+  conneg.provide([:json, :xml, :html, :text])
 }
  
 before do
   if negotiated?
-    content_type negotiated_type
+    #content_type negotiated_type
   end
 end
     
