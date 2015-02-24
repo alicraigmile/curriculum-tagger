@@ -16,9 +16,7 @@ use(Rack::Conneg) { |conneg|
 }
  
 before do
-  if negotiated?
-    #content_type negotiated_type
-  end
+  headers['Access-Control-Allow-Origin'] = '*'
 end
     
 get "/" do
@@ -28,7 +26,10 @@ end
 get '/hello' do
   response = { :message => 'Hello, World!' }
   respond_to do |wants|
-    wants.json  { response.to_json         }
+    wants.json  { 
+      content_type :json
+      response.to_json
+    }
     wants.xml   { response.to_xml          }
     wants.other { 
       content_type 'text/plain'
@@ -39,11 +40,18 @@ end
 
 get '/images/search' do
   # matches "GET /images/search?q=volcanos"
-  @images = [{:width => 56, :height => 48, :url => '/images/document.svg'}]
+  @images = {:responseData => {:results => [{:tbWidth => 56, :tbHeight => 48, :tbUrl => 'http://localhost:9292/images/document.svg'}]}}
   respond_to do |wants|
-    wants.json  { @images.to_json }
-    wants.xml   { builder :imagesearch }
-    wants.html   { erb :imagesearch }
+    wants.json  {
+      content_type :json
+      @images.to_json
+    }
+    wants.xml   {
+      content_type :xml
+      builder :imagesearch }
+    wants.html   {
+      content_type :html
+      erb :imagesearch }
     wants.other { 
       content_type 'text/plain'
       error 406, "Not Acceptable" 

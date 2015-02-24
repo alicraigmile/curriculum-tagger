@@ -61,11 +61,14 @@ function getImageUrl(searchTerm, callback, errorCallback) {
   x.onload = function() {
     // Parse and process the response from Google Image Search.
     var response = x.response;
+    console.log('x.response')
     if (!response || !response.responseData || !response.responseData.results ||
         response.responseData.results.length === 0) {
+        console.log('bad data')
       errorCallback('No response from Curriculum Image search!');
       return;
     }
+    console.log('firstResult')
     var firstResult = response.responseData.results[0];
     // Take the thumbnail instead of the full image to get an approximately
     // consistent image size.
@@ -75,6 +78,7 @@ function getImageUrl(searchTerm, callback, errorCallback) {
     console.assert(
         typeof imageUrl == 'string' && !isNaN(width) && !isNaN(height),
         'Unexpected respose from the Google Image Search API!');
+    console.log('callback')
     callback(imageUrl, width, height);
   };
   x.onerror = function(err) {
