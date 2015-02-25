@@ -1,4 +1,16 @@
-<h1>Post: <%= @post.title %></h1>
-<h2>Created: <%= @post.created_at %></h2>
-<h2>Updated: <%= @post.updated_at %></h2>
-<p><%= @post.body %></p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @post.title %></title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+
+  <h1><%= @post.title %></h1>
+  <p>Created: <%= @post.created_at %></p>
+  <p>Updated: <%= @post.updated_at %></p>
+  <hr>
+  <p><%= @post.body %></p>
+
+</body>
+</html>
