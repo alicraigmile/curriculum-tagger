@@ -9,6 +9,7 @@ require 'rack/conneg'
 
 require 'posts'
 require 'levels'
+require 'images'
 
 use(Rack::Conneg) { |conneg|
   conneg.set :accept_all_extensions, false
@@ -40,13 +41,39 @@ get '/hello' do
   end
 end
 
-get '/images/search' do
-  # matches "GET /images/search?q=volcanos"
-  @images = {:responseData => {:results => [{:tbWidth => 56, :tbHeight => 48, :tbUrl => 'http://localhost:9292/images/document.svg'}]}}
+
+get '/images' do
+  # matches "GET /images"
+  @images = Image.all()
+    
   respond_to do |wants|
     wants.json  {
       content_type :json
-      @images.to_json
+      {:images => @images}.to_json
+    }
+    wants.xml   {
+      content_type :xml
+      builder :images }
+    wants.html   {
+      content_type :html
+      erb :images  }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+  end
+end
+
+get '/images/search' do
+  # matches "GET /images/search?q=volcanos"
+  #@images = {:responseData => {:results => [{:tbWidth => 56, :tbHeight => 48, :tbUrl => 'http://localhost:9292/images/document.svg'}]}}
+  @images = Image.find(:title => params['q'])
+  @query = params['q']
+    
+  respond_to do |wants|
+    wants.json  {
+      content_type :json
+    {:results => @images, :query => @query}.to_json
     }
     wants.xml   {
       content_type :xml

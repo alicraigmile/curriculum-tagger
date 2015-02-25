@@ -1,7 +1,21 @@
-<h1>Images</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image results for '<%= @query %>'</title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+
+<h1>Image results for '<%= @query %>'</h1>
 <% for image in @images %>
-  <img src="<%= image[:url] %>" width="<%= image[:width] %>" height="<%= image[:height] %>">
-  <p>url: <%= image[:url] %></p>
-  <p>width: <%= image[:width] %></p>
-  <p>height: <%= image[:height] %></p>
+  <div class="box">
+  <h2><%= image.title %></h2>
+  <img src="<%= image.url %>" width="<%= image.width %>" height="<%= image.height %>" title="<%= image.title %>">
+  <p>url: <%= image.url %></p>
+  <p>width: <%= image.width %></p>
+  <p>height: <%= image.height %></p>
+  </div>
 <% end %>
+
+</body>
+</html>

@@ -62,22 +62,22 @@ function getImageUrl(searchTerm, callback, errorCallback) {
     // Parse and process the response from Google Image Search.
     var response = x.response;
     console.log('x.response')
-    if (!response || !response.responseData || !response.responseData.results ||
-        response.responseData.results.length === 0) {
+    if (!response || !response || !response.results ||
+        response.results.length === 0) {
         console.log('bad data')
       errorCallback('No response from Curriculum Image search!');
       return;
     }
     console.log('firstResult')
-    var firstResult = response.responseData.results[0];
+    var firstResult = response.results[0];
     // Take the thumbnail instead of the full image to get an approximately
     // consistent image size.
-    var imageUrl = firstResult.tbUrl;
-    var width = parseInt(firstResult.tbWidth);
-    var height = parseInt(firstResult.tbHeight);
+    var imageUrl = firstResult.url;
+    var width = parseInt(firstResult.width);
+    var height = parseInt(firstResult.height);
     console.assert(
         typeof imageUrl == 'string' && !isNaN(width) && !isNaN(height),
-        'Unexpected respose from the Google Image Search API!');
+        'Unexpected respose from the Curriculum Image Search API!');
     console.log('callback')
     callback(imageUrl, width, height);
   };
@@ -113,12 +113,12 @@ document.addEventListener('DOMContentLoaded', function() {
   	document.body.style.backgroundColor = "red";
 
    // Put the image URL in Google search.
-    renderStatus('Performing Google Image search for ' + url);
+    renderStatus('Performing Curriculum Image search for ' + url);
 
     getImageUrl(url, function(imageUrl, width, height) {
 
       renderStatus('Search term: ' + url + '\n' +
-          'Google image search result: ' + imageUrl);
+          'Curriculum image search result: ' + imageUrl);
       var imageResult = document.getElementById('image-result');
       // Explicitly set the width/height to minimize the number of reflows. For
       // a single image, this does not matter, but if you're going to embed
