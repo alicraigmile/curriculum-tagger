@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Relationship <%= @relationship.id %></title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+
+  <h1>Relationship <%= @relationship.id %></h1>
+  <p>Created: <%= @relationship.created_at %></p>
+  <p>Updated: <%= @relationship.updated_at %></p>
+  <hr>
+ <table>
+  <tbody>
+    <tr>
+      <th>Subject</th>
+      <td><%= @relationship.subject %></td>
+    </tr>
+    <tr>
+      <th>Predicate</th>
+      <td><%= @relationship.predicate %></td>
+    </tr>
+    <tr>
+      <th>Object</th>
+      <td><%= @relationship.object %></td>
+    </tr>
+  </tbody>
+  </table>
+</body>
+</html>
