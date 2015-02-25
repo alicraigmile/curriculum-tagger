@@ -10,6 +10,7 @@ require 'rack/conneg'
 require 'posts'
 require 'levels'
 require 'images'
+require 'relationships'
 
 use(Rack::Conneg) { |conneg|
   conneg.set :accept_all_extensions, false
@@ -123,6 +124,17 @@ get '/posts/:id' do
     @post = Post.find_by(:id => params[:id])
     pass unless @post
     erb :post
+end
+
+get '/relationships' do
+    @relationships = Relationship.all()
+    erb :relationships
+end
+
+get '/relationships/:id' do
+    @relationship = Relationship.find_by_id(params[:id])
+    pass unless @relationship
+    erb :relationship
 end
 
 get "/version" do

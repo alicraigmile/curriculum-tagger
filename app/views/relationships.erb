@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Relationships</title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+
+  <h1>Relationships</h1>
+  <table>
+  <thead>
+    <th> </th>
+    <th>Subject</th>
+    <th>Predicate</th>
+    <th>Object</th>
+  </thead>
+  <tbody>
+  <% for rel in @relationships %>
+    <tr>
+      <td><a href="/relationships/<%= rel.id %>"><%= rel.id %></a></td>
+      <td><%= rel.subject %></td>
+      <td><%= rel.predicate %></td>
+      <td><%= rel.object %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  </table>
+  
+</body>
+</html>
