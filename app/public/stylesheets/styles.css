@@ -1,0 +1,10 @@
+body {
+	font-size: 1.1em;
+	line-height: 1.5em;
+	font-family: arial;
+	color: #34282c
+}
+h1 {font-size: 1.4em}
+h2 {font-size: 1.3em}
+
+.box { padding: 8px 16px; background: #ddd; margin-right: 16px; margin-bottom: 16px;  width: 10em; }

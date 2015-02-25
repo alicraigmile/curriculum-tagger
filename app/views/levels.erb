@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Levels</title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <link title="Levels in JSON"
+    type="application/json"
+    rel="alternate"
+    href="/levels.json">
+  <link title="Levels in XML"
+    type="application/xml"
+    rel="alternate"
+    href="/levels.xml">
+</head>
+<body>
+  <h1>Levels</h1>
+  <% for level in @levels %>
+    <div class="box">
+      <h2><%= level.label %></h2>
+      <p><a href="http://www.bbc.co.uk/education/levels/<%= level.id %>">Visit BBC Bitesize</a></p>
+    </div>
+  <% end %>
+</body>
+</html>

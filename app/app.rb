@@ -4,9 +4,11 @@ $LOAD_PATH.unshift *Dir.glob(libs)
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/lib'
 
 require 'sinatra'
+require 'builder'
 require 'rack/conneg'
 
 require 'posts'
+require 'levels'
 
 use(Rack::Conneg) { |conneg|
   conneg.set :accept_all_extensions, false
@@ -52,6 +54,28 @@ get '/images/search' do
     wants.html   {
       content_type :html
       erb :imagesearch }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+  end
+end
+
+get '/levels' do
+  # matches "GET /levels"
+  @levels = Level.all
+    
+  respond_to do |wants|
+    wants.json  {
+      content_type :json
+      {:levels => @levels}.to_json
+    }
+    wants.xml   {
+      content_type :xml
+      builder :levels }
+    wants.html   {
+      content_type :html
+      erb :levels }
     wants.other { 
       content_type 'text/plain'
       error 406, "Not Acceptable" 
