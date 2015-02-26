@@ -12,14 +12,28 @@ xml.results :version => "1.0" do
       end
     end
   end
-  xml.alternates do
-    xml.alternate do
-      xml.format 'text/html'
-      xml.href '/relationships.html' 
-    end
-    xml.alternate do
-      xml.format 'application/json'
-      xml.href '/relationships.json' 
-    end
-  end 
+  case @by
+  when nil
+    xml.alternates do
+      xml.alternate do
+        xml.format 'text/html'
+        xml.href '/relationships.html' 
+      end
+      xml.alternate do
+        xml.format 'application/json'
+        xml.href '/relationships.json' 
+      end
+    end 
+  else
+    xml.alternates do
+      xml.alternate do
+        xml.format 'text/html'
+        xml.href '/relationships/by/'+ @by +'.html?uri='  + u(@uri)
+      end
+      xml.alternate do
+        xml.format 'application/json'
+        xml.href '/relationships/by/'+ @by +'.json?uri=' + u(@uri)
+      end
+    end 
+  end
 end

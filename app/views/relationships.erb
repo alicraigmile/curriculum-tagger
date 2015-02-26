@@ -3,14 +3,26 @@
 <head>
   <title>Relationships</title>
   <link rel="stylesheet" href="/stylesheets/styles.css">
-  <link title="Relationships in JSON"
-    type="application/json"
-    rel="alternate"
-    href="/relationships.json">
-  <link title="Relationships in XML"
-    type="application/xml"
-    rel="alternate"
-    href="/relationships.xml">
+  <% case @by
+  when nil %>
+    <link title="Relationships in JSON"
+      type="application/json"
+      rel="alternate"
+      href="/relationships.json">
+    <link title="Relationships in XML"
+      type="application/xml"
+      rel="alternate"
+      href="/relationships.xml">
+  <% else %>
+    <link title="Relationships in JSON"
+      type="application/json"
+      rel="alternate"
+      href="/relationships/by/<%= @by %>.json?uri=<%=u @uri %>">
+    <link title="Relationships in XML"
+      type="application/xml"
+      rel="alternate"
+      href="/relationships/by/<%= @by %>.xml?uri=<%=u @uri %>">
+  <% end %> 
 </head>
 <body>
 
