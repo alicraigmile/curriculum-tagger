@@ -3,6 +3,14 @@
 <head>
   <title>Relationship <%= @relationship.id %></title>
   <link rel="stylesheet" href="/stylesheets/styles.css">
+  <link title="Relationship in JSON"
+    type="application/json"
+    rel="alternate"
+    href="/relationships/<%= @relationship.id %>.json">
+  <link title="Relationship in XML"
+    type="application/xml"
+    rel="alternate"
+    href="/relationships/<%= @relationship.id %>.xml">
 </head>
 <body>
 
