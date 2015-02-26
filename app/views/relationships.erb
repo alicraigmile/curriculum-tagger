@@ -31,7 +31,7 @@
       <td><a href="/relationships/<%= rel.id %>"><%= rel.id %></a></td>
       <td><a href="/relationships/by/subject/?uri=<%=u rel.subject %>" title="Relationships where the subject is '<%= rel.subject %>'"><%= rel.subject %></a></td>
       <td><%= rel.predicate %></td>
-      <td><%= rel.object %></td>
+      <td><a href="/relationships/by/object/?uri=<%=u rel.object %>" title="Relationships where the object is '<%= rel.object %>'"><%= rel.object %></a></td>
     </tr>
   <% end %>
   </tbody>

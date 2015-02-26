@@ -30,7 +30,7 @@
     </tr>
     <tr>
       <th>Object</th>
-      <td><%= @relationship.object %></td>
+      <td><a href="/relationships/by/object/?uri=<%=u @relationship.object %>" title="Relationships where the object is '<%= @relationship.object %>'"><%= @relationship.object %></a></td>
     </tr>
   </tbody>
   </table>
