@@ -22,7 +22,7 @@
   <tbody>
     <tr>
       <th>Subject</th>
-      <td><%= @relationship.subject %></td>
+      <td><a href="/relationships/by/subject/?uri=<%=u @relationship.subject %>" title="Relationships where the subject is '<%= @relationship.subject %>'"><%= @relationship.subject %></a></td>
     </tr>
     <tr>
       <th>Predicate</th>

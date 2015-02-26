@@ -147,6 +147,29 @@ get '/relationships/?' do
   end
 end
 
+get '/relationships/by/subject/?' do
+  @relationships = Relationship.where(:subject => params[:uri])
+  @by = 'subject'
+  @uri = params[:uri]
+    
+  respond_to do |wants|
+    wants.json  {
+      content_type :json
+      {:relationships => @relationships}.to_json
+    }
+    wants.xml   {
+      content_type :xml
+      builder :relationships }
+    wants.html   {
+      content_type :html
+      erb :relationships  }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+  end
+end
+
 get '/relationships/:id' do
     @relationship = Relationship.find_by_id(params[:id])
     pass unless @relationship
@@ -185,4 +208,13 @@ end
 get "/version" do
     @version = `git rev-parse --short HEAD`
     erb :version, :content_type => 'text/plain'
+end
+
+helpers do
+  def h(text)
+    Rack::Utils.escape_html(text)
+  end
+  def u(text)
+    Rack::Utils.escape(text)
+  end
 end
