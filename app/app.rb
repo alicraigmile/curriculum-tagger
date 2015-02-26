@@ -43,7 +43,7 @@ get '/hello' do
 end
 
 
-get '/images' do
+get '/images/?' do
   # matches "GET /images"
   @images = Image.all()
     
@@ -89,7 +89,7 @@ get '/images/search' do
   end
 end
 
-get '/levels' do
+get '/levels/?' do
   # matches "GET /levels"
   @levels = Level.all
     
@@ -115,7 +115,7 @@ get "/ping" do
     erb :ping, :content_type => 'text/plain'
 end
 
-get '/posts' do
+get '/posts/?' do
     @posts = Post.all()
     erb :posts
 end
@@ -126,7 +126,7 @@ get '/posts/:id' do
     erb :post
 end
 
-get '/relationships' do
+get '/relationships/?' do
     @relationships = Relationship.all()
     erb :relationships
 end
