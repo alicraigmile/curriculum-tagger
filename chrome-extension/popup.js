@@ -51,35 +51,36 @@ function getCurrentTabDetails(callback) {
   // alert(url); // Shows "undefined", because chrome.tabs.query is async.
 }
 
-function getImageUrl(searchTerm, callback, errorCallback) {
-  var searchUrl = 'http://localhost:9292/images/search.json' +
-    '?q=' + encodeURIComponent(searchTerm);
+
+function postRelationship(s, p, o, callback, errorCallback) {
+  var postUrl = 'http://localhost:9292/relationships';
   var x = new XMLHttpRequest();
-  x.open('GET', searchUrl);
-  // The Google image search API responds with JSON, so let Chrome parse it.
-  x.responseType = 'json';
+  x.open('POST', postUrl);
+  x.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  x.setRequestHeader ("Accept", "application/json");
+  x.send("subject="+s+"&predicate="+p+"&object="+o);
+//  x.responseType = 'json';
   x.onload = function() {
     // Parse and process the response from Google Image Search.
     var response = x.response;
     console.log('x.response')
-    if (!response || !response || !response.results ||
-        response.results.length === 0) {
+    console.log(response)
+    console.log(response.relationship) // <!-- WHY THIS NO WORKY
+    if (!response || !response.relationship) {
         console.log('bad data')
-      errorCallback('No response from Curriculum Image search!');
+      errorCallback('No response from relationships API!');
       return;
     }
-    console.log('firstResult')
-    var firstResult = response.results[0];
+    console.log('relationship data')
+    var relationship = response.relationship;
     // Take the thumbnail instead of the full image to get an approximately
     // consistent image size.
-    var imageUrl = firstResult.url;
-    var width = parseInt(firstResult.width);
-    var height = parseInt(firstResult.height);
+    var id = relationship.id;
     console.assert(
-        typeof imageUrl == 'string' && !isNaN(width) && !isNaN(height),
-        'Unexpected respose from the Curriculum Image Search API!');
+        typeof !isNaN(id),
+        'Unexpected respose from the Relationships API!');
     console.log('callback')
-    callback(imageUrl, width, height);
+    callback(subject, predicate, object, id);
   };
   x.onerror = function(err) {
     errorCallback('Network error.' + err.description);
@@ -112,25 +113,29 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('tag-button').addEventListener('click', function(e) {
   	document.body.style.backgroundColor = "red";
 
+  	var objects = document.getElementsByName('object');
+  	var object_value;
+  	for(var i = 0; i < objects.length; i++){
+  	    if(objects[i].checked){
+  	    	object_value = objects[i].value;
+  	    }
+  	}
+  	
+  	
+  	// subject, predicate, object
+  	s =  url;
+  	p = 'urn:about';
+  	o =  object_value;
+  	
    // Put the image URL in Google search.
-    renderStatus('Performing Curriculum Image search for ' + url);
+    renderStatus('Recording Tag for ' + s);
 
-    getImageUrl(url, function(imageUrl, width, height) {
+    postRelationship(s, p, o, function(id) {
 
-      renderStatus('Search term: ' + url + '\n' +
-          'Curriculum image search result: ' + imageUrl);
-      var imageResult = document.getElementById('image-result');
-      // Explicitly set the width/height to minimize the number of reflows. For
-      // a single image, this does not matter, but if you're going to embed
-      // multiple external images in your page, then the absence of width/height
-      // attributes causes the popup to resize multiple times.
-      imageResult.width = width;
-      imageResult.height = height;
-      imageResult.src = imageUrl;
-      imageResult.hidden = false;
+      renderStatus('Tagged! (as ' + id + ')');
 
     }, function(errorMessage) {
-      renderStatus('Cannot display image. ' + errorMessage);
+      renderStatus('Cannot tag. ' + errorMessage);
     });
 
 
