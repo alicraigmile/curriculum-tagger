@@ -1,0 +1,9 @@
+{
+  "name": "curriculum-tagger",
+  "title": "Curriculum tagger",
+  "id": "jid1-cxCeYJCujD14cg",
+  "description": "This extension allows you to tag the current page as to how it maps to the UK Curricula.",
+  "author": "Ali Craigmile <ali@craigmile.com>",
+  "license": "MPL 2.0",
+  "version": "0.1"
+}
