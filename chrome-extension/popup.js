@@ -59,12 +59,17 @@ function postRelationship(s, p, o, callback, errorCallback) {
   x.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   x.setRequestHeader ("Accept", "application/json");
   x.send("subject="+s+"&predicate="+p+"&object="+o);
-//  x.responseType = 'json';
+  x.responseType = 'json';
   x.onload = function() {
     // Parse and process the response from Google Image Search.
     var response = x.response;
     console.log('x.response')
     console.log(response)
+    var y = response.relationship;
+    console.log(y);
+    var z = response['relationship'];
+    console.log(z);
+    
     console.log(response.relationship) // <!-- WHY THIS NO WORKY
     if (!response || !response.relationship) {
         console.log('bad data')
@@ -111,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
    document.getElementById('tag-button').disabled = false;
 
 	document.getElementById('tag-button').addEventListener('click', function(e) {
-  	document.body.style.backgroundColor = "red";
 
   	var objects = document.getElementsByName('object');
   	var object_value;
@@ -132,9 +136,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     postRelationship(s, p, o, function(id) {
 
+  	document.body.style.backgroundColor = "green";
       renderStatus('Tagged! (as ' + id + ')');
 
     }, function(errorMessage) {
+  	document.body.style.backgroundColor = "red";
       renderStatus('Cannot tag. ' + errorMessage);
     });
 
