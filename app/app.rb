@@ -137,8 +137,20 @@ get '/relationships/:id' do
     erb :relationship
 end
 
+post '/relationships/?' do
+    rel = Relationship.new()
+    rel.subject = params[:subject]
+    rel.predicate = params[:predicate]
+    rel.object = params[:object]
+    begin
+      rel.save!
+      redirect '/relationships/' + rel.id.to_s
+    rescue Exception => e
+      error 400, 'Bad Request: ' + e.message
+    end
+end
+
 get "/version" do
-    #@version = '1.0'
     @version = `git rev-parse --short HEAD`
     erb :version, :content_type => 'text/plain'
 end
