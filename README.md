@@ -1,8 +1,8 @@
 # Curriculum Tagger
 
-While browsing around the web, and you find a page that teaches you somethign new, tag the page so that others can learn that something too.
+While browsing around the web, and you find a page that teaches you something new, tag the page so that others can learn that something too.
 
-With a couple of clicks you can map web pages directly to one or more Curricula (e.g. National Curriculum, Curriculum for Excellence, UK Funcational Skills, etc) and help Teachers and Students alike find great resources for their own teaching and studies.
+With a couple of clicks you can map web pages directly to the Curriculum and so help Teachers and Students around the globe find great resources for their own teaching and studies.
 
 Curriculum tagger is available in Chrome and Firefox favours.
 
