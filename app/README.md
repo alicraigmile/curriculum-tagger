@@ -15,3 +15,13 @@ Curriculum Tagger is a rack based web application and so you can configure it to
 ``` bash
 ./run.sh
 ```
+
+### To run on a dedicated port
+
+Visit http://localhost:9292/ping and you should see 'ok'
+
+
+### API Documentation
+
+Visit http://localhost:9292/
+
