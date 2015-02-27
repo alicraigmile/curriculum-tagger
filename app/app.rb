@@ -252,4 +252,9 @@ helpers do
   def u(text)
     Rack::Utils.escape(text)
   end
+  def include(path)
+    content = File.read(File.expand_path('views/' + path))
+    t = ERB.new(content)
+    t.result(binding)
+  end
 end
