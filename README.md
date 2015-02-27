@@ -1,30 +1,23 @@
-# curriculum-tagger
+# Curriculum Tagger
 
-## chrome extension
+While browsing around the web, and you find a page that teaches you somethign new, tag the page so that others can learn that something too.
 
-While browsing around the web, tag content you find against the UK Curricula.
+With a couple of clicks you can map web pages directly to one or more Curricula (e.g. National Curriculum, Curriculum for Excellence, UK Funcational Skills, etc) and help Teachers and Students alike find great resources for their own teaching and studies.
 
-To install: visit chrome://extensions, Developer mode, Load unpacked extension...
+Curriculum tagger is available in Chrome and Firefox favours.
 
-## firefox addon
+## Chrome Extension
 
-See [firefox-addon/README.md]
+See [the README for the Chrome Extension](chrome-extension/README.md)
 
-## Web application
+## Firefox Addon
 
-A small sintara web API to record the tagging relationships, and offer up curriculum concepts to tag things with.
+WIP: Currently the Firefox Extension only supports viewing tags.
 
-To configure:
+See [the README for the Firefox Addon](firefox-addon/README.md)
 
-``` bash
-cd app
-bundle install
-./database-setup.sh
-```
+## Curriculum Tagger Web Application
 
-To run
+Under the bonnet, Curriculum Tagger is a ruby/sinatra application. It's this that the browser extensions communicate with - and which stores and retreives data from the database.
 
-``` bash
-cd app
-bin/rackup -p 2000
-```
+See [the README for the Web Application](app/README.md)
