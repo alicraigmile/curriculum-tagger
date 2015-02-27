@@ -149,8 +149,14 @@ end
 
 get '/relationships/by/object/?' do
   @relationships = Relationship.where(:object => params[:uri])
-  @by = 'object'
+  @by = params[:by]
   @uri = params[:uri]
+
+  if @by 
+    redirect '/relationships/by/' + @by + '/?uri=' + u(params[:uri])
+  end
+  
+  @by = 'object'
     
   respond_to do |wants|
     wants.json  {
@@ -172,9 +178,15 @@ end
 
 get '/relationships/by/subject/?' do
   @relationships = Relationship.where(:subject => params[:uri])
-  @by = 'subject'
+  @by = params[:by]
   @uri = params[:uri]
-    
+
+  if @by 
+    redirect '/relationships/by/' + @by + '/?uri=' + u(params[:uri])
+  end
+  
+  @by = 'subject'
+  
   respond_to do |wants|
     wants.json  {
       content_type :json

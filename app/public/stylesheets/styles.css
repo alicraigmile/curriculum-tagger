@@ -1,13 +1,13 @@
-body {
-	font-size: 1.1em;
-	line-height: 1.5em;
+body {line-height: 1.5em;
 	font-family: arial;
-	color: #34282c
-}
+	color: #34282c}
 h1 {font-size: 1.4em}
 h2 {font-size: 1.3em}
-table {border-collapse: collapse;}
+p, select {font-size: 1.1em}
+input {font-size: 0.8em}
+#relationships-form-uri-field {width: 30em}
+table {border-collapse: collapse}
 table td, table th {padding: 8px 16px;text-align: left}
-table td {border: 1px solid #34282c; }
+table td {border: 1px solid #34282c}
 tr:nth-child(even) td {background: #ddd}
-.box { padding: 8px 16px; background: #ddd; margin-right: 16px; margin-bottom: 16px;  width: 10em; }
+.box {padding: 8px 16px; background: #ddd; margin-right: 16px; margin-bottom: 16px;  width: 10em}

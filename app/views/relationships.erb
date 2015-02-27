@@ -23,12 +23,20 @@
       rel="alternate"
       href="/relationships/by/<%= @by %>.xml?uri=<%=u @uri %>">
   <% end %> 
+  <script src="/scripts/actions.js"></script>
 </head>
 <body>
 
   <h1>Relationships</h1>
   <% if @by %>
-    <p>where <%= @by %> = '<%= @uri %>'.</p>
+  <form action="/relationships/by/<%= @by %>" method="get">
+    <p>where
+    <select id="relationships-form-uri-select" name="by">
+    <option value="subject" <%if @by == 'subject'%>selected<% end %>>subject</option>
+    <option value="object" <%if @by == 'object'%>selected<% end %>>object</option>
+    </select>
+     = <input id="relationships-form-uri-field" type="text" name="uri" value="<%=h @uri %>"> <input type="submit" value="update" id="relationships-form-submit-button"></p>
+    </form>
   <% end %> 
   <table>
   <thead>
