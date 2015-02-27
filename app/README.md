@@ -2,7 +2,7 @@
 
 ## Installation
 
-Curriculum Tagger is a rack based web application and so you can configure it to run in any of the usual ways (e.g. heroku or apache-passenger). It works well started on the commandline, running on a dedicated port too.
+Curriculum Tagger is a RESTful web API. It's built on top of the Sinatra framework - and so as a rack based app - it can be configured to run in a number of environments (e.g. heroku or apache-passenger). It works well started on the commandline, running on a dedicated port too.
 
 ### Setup
 
@@ -16,12 +16,13 @@ Curriculum Tagger is a rack based web application and so you can configure it to
 ./run.sh
 ```
 
-### To run on a dedicated port
+Note: ^C to quit
 
-Visit http://localhost:9292/ping and you should see 'ok'
+### Testing
 
+If the application started properly, you should see 'ok' when you visit [http://localhost:9292/ping](http://localhost:9292/ping).
 
-### API Documentation
+### Usage / Getting Started
 
-Visit http://localhost:9292/
+The Curriculum Tagger Web Application is a self documenting RESTful Web API. To get started visit [http://localhost:9292/](http://localhost:9292/)
 
