@@ -14,16 +14,29 @@ xml.results :version => "1.0" do
   end
   case @by
   when nil
-    xml.alternates do
-      xml.alternate do
-        xml.format 'text/html'
-        xml.href '/relationships.html' 
-      end
-      xml.alternate do
-        xml.format 'application/json'
-        xml.href '/relationships.json' 
-      end
-    end 
+    if @latest
+      xml.alternates do
+        xml.alternate do
+          xml.format 'text/html'
+          xml.href '/relationships/latest.html?show=' + @show
+        end
+        xml.alternate do
+          xml.format 'application/json'
+          xml.href '/relationships/latest.json?show=' + @show
+        end
+      end 
+    else
+      xml.alternates do
+        xml.alternate do
+          xml.format 'text/html'
+          xml.href '/relationships.html' 
+        end
+        xml.alternate do
+          xml.format 'application/json'
+          xml.href '/relationships.json' 
+        end
+      end 
+    end
   else
     xml.alternates do
       xml.alternate do
