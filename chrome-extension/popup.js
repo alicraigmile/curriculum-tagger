@@ -2,7 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-/**
+var API_URL = 'http://localhost:9292/'
+
+	/**
  * Get the current URL.
  *
  * @param {function(string)} callback - called when the URL of the current tab
@@ -53,7 +55,7 @@ function getCurrentTabDetails(callback) {
 
 
 function postRelationship(s, p, o, callback, errorCallback) {
-  var postUrl = 'http://localhost:9292/relationships';
+  var postUrl = API_URL + '/relationships';
   var x = new XMLHttpRequest();
   x.open('POST', postUrl);
   x.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -84,8 +86,8 @@ function postRelationship(s, p, o, callback, errorCallback) {
     console.assert(
         typeof !isNaN(id),
         'Unexpected respose from the Relationships API!');
-    console.log('callback')
-    callback(subject, predicate, object, id);
+    console.log('callback: ' + id)
+    callback(id);
   };
   x.onerror = function(err) {
     errorCallback('Network error.' + err.description);
@@ -95,7 +97,11 @@ function postRelationship(s, p, o, callback, errorCallback) {
 
 
 function renderStatus(statusText) {
-  document.getElementById('status').textContent = statusText;
+  document.getElementById('status').innerHTML = statusText;
+}
+
+function openTab(newURL) {
+	chrome.tabs.create({ url: newURL });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -135,9 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
     renderStatus('Recording Tag for ' + s);
 
     postRelationship(s, p, o, function(id) {
-
+    console.log('id ' + id);
   	document.body.style.backgroundColor = "green";
-      renderStatus('Tagged! (as ' + id + ')');
+      renderStatus('<a onClick="openTab(\''+API_URL+'/relationships/'+id + '\');">Tagged successfully!</a>');
+      
+      //'<a href="'+API_URL+'/relationships/'+id + '
 
     }, function(errorMessage) {
   	document.body.style.backgroundColor = "red";

@@ -3,6 +3,8 @@ libs = File.expand_path("vendor/bundle/gems/**/lib", __FILE__)
 $LOAD_PATH.unshift *Dir.glob(libs)
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/lib'
 
+$show_x_latest_relationships = 10
+
 require 'sinatra'
 require 'builder'
 require 'rack/conneg'
@@ -128,6 +130,33 @@ end
 
 get '/relationships/?' do
   @relationships = Relationship.all()
+   
+  respond_to do |wants|
+    wants.json  {
+      content_type :json
+      {:relationships => @relationships}.to_json
+    }
+    wants.xml   {
+      content_type :xml
+      builder :relationships }
+    wants.html   {
+      content_type :html
+      erb :relationships  }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+  end
+end
+
+
+get '/relationships/latest/?' do
+  show = params[:show] ||= $show_x_latest_relationships
+  
+  @relationships = Relationship.last(show).reverse
+  @latest = true
+  @show = show #how many did we ask to return
+  @count = @relationships.length #how many did we actually return
    
   respond_to do |wants|
     wants.json  {

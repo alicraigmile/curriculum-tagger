@@ -37,7 +37,20 @@
     </select>
      = <input id="relationships-form-uri-field" type="text" name="uri" value="<%=h @uri %>"> <input type="submit" value="update" id="relationships-form-submit-button"></p>
     </form>
-  <% end %> 
+  <% end %>
+  <% if @latest %>
+    <p>Latest <%= @count %> shown.</p>
+     <form action="/relationships/latest" method="get">
+    <p>Show
+    <select id="latest-relationships-select" name="show">
+    <% [10, 25, 100, 150].each do |num| %>
+    <option value="<%= num %>" <%if @show.to_i == num %>selected<% end %>><%= num %></option>
+    <% end %>
+    </select>
+    at a time.
+    <input type="submit" value="update" id="latest-relationships-form-submit-button"></p>
+  <% end %>
+    </form>
   <table>
   <thead>
     <th> </th>
