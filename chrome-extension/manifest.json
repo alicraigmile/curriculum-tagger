@@ -16,7 +16,9 @@
   },
   
   "permissions": [
+    "tabs",
     "activeTab",
-    "https://ajax.googleapis.com/"
+    "webNavigation",
+    "*://*/*"
   ]
 }
