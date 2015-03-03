@@ -123,29 +123,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	document.getElementById('tag-button').addEventListener('click', function(e) {
 
-  	var objects = document.getElementsByName('object');
-  	var object_value;
-  	for(var i = 0; i < objects.length; i++){
-  	    if(objects[i].checked){
-  	    	object_value = objects[i].value;
-  	    }
-  	}
-  	
-  	
-  	// subject, predicate, object
-  	s =  url;
-  	p = 'urn:about';
-  	o =  object_value;
-  	
-   // Put the image URL in Google search.
-    renderStatus('Recording Tag for ' + s);
+	  	var objects = document.getElementsByName('object');
+	  	var object_value;
+	  	for(var i = 0; i < objects.length; i++){
+	  	    if(objects[i].checked){
+	  	    	object_value = objects[i].value;
+	  	    }
+	  	}
+	  	  	
+	  	// subject, predicate, object
+	  	s =  url;
+	  	p = 'urn:about';
+	  	o =  object_value;
+	  	
+	  	// Put the image URL in Google search.
+	    renderStatus('Recording Tag for ' + s);
 
-    postRelationship(s, p, o, function(id) {
-    console.log('id ' + id);
-  	document.body.style.backgroundColor = "green";
-      renderStatus('<a onClick="openTab(\''+API_URL+'/relationships/'+id + '\');">Tagged successfully!</a>');
-      
-      //'<a href="'+API_URL+'/relationships/'+id + '
+	    postRelationship(s, p, o, function(id) {
+	    console.log('id ' + id);
+	  	document.body.style.backgroundColor = "green";
+	  	renderStatus('<a onClick="openTab(\''+API_URL+'/relationships/'+id + '\');">Tagged successfully!</a>');
+	  	chrome.browserAction.setIcon({path:"icon-tagged.png"});
 
     }, function(errorMessage) {
   	document.body.style.backgroundColor = "red";
