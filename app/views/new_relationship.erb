@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New relationship</title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+  <p><a href="/" title="API Docs | Curriculum Tagger"> Home</a></p>
+  <h1>New relationship</h1>
+  <hr>
+   <h3>Details</h3>
+<form action="/relationships/" method="post">
+ <table>
+  <tbody>
+    <tr>
+      <th>Subject</th>
+      <td><input id="relationship-form-s-field" name="s" value="<%=h @subject %>"></td>
+    </tr>
+    <tr>
+      <th>Predicate</th>
+      <td><input id="relationship-form-p-field" name="p" value="<%=h @predicate %>">  </td>
+    </tr>
+    <tr>
+      <th>Object</th>
+      <td><input id="relationship-form-o-field" name="o" value="<%=h @object %>"></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td><input type="submit" name="" value="Save this relationship"></a></td>
+    </tr>
+  </tfoot>
+  </table>
+  </form>
+
+  <%= include 'github-ribbon.erb' %>
+</body>
+</html>

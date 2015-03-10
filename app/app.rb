@@ -198,6 +198,14 @@ get '/relationships/latest/?' do
   end
 end
 
+get '/relationships/new' do
+  @subject = params[:s]
+  @predicate = params[:p]
+  @object = params[:o]
+
+  erb :new_relationship
+end
+
 get '/relationships/by/object/?' do
   @relationships = Relationship.where(:object => params[:uri])
   @by = params[:by]
@@ -313,9 +321,9 @@ end
 
 post '/relationships/?' do
     rel = Relationship.new()
-    rel.subject = params[:subject]
-    rel.predicate = params[:predicate]
-    rel.object = params[:object]
+    rel.subject = params[:s]
+    rel.predicate = params[:p]
+    rel.object = params[:o]
     begin
       rel.save!
       redirect '/relationships/' + rel.id.to_s

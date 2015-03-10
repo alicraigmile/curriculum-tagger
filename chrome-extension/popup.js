@@ -60,7 +60,7 @@ function postRelationship(s, p, o, callback, errorCallback) {
   x.open('POST', postUrl);
   x.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   x.setRequestHeader ("Accept", "application/json");
-  x.send("subject="+s+"&predicate="+p+"&object="+o);
+  x.send("s="+s+"&p="+p+"&o="+o);
   x.responseType = 'json';
   x.onload = function() {
     // Parse and process the response from Google Image Search.
