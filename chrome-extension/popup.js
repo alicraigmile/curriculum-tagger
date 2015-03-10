@@ -121,6 +121,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
    document.getElementById('tag-button').disabled = false;
 
+   // if level is mentioned in URL, pre-select a radio button
+	var levels = document.getElementsByName('object');
+	for(var i = 0; i < levels.length; i++){
+    if (url.indexOf(levels[i].value) > 0) {
+	    levels[i].checked = true;
+    }
+  }
+
+
 	document.getElementById('tag-button').addEventListener('click', function(e) {
 
 	  	var objects = document.getElementsByName('object');
