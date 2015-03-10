@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @level.label %></title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+  <p><a href="/" title="API Docs | Curriculum Tagger"> Home</a></p>
+
+  <h1><%= @level.label %></h1>
+  <p><%= @level.description %></p>
+  <hr>
+  <p><a href="/relationships/by/object/?uri=<%= @level.id %>">Relationships where '<%= @level.label %>' is the subject</a></p>
+  <p><a href="http://www.bbc.co.uk/education/levels/<%= @level.id %>">Visit BBC Bitesize</a></p>
+
+<%= include 'github-ribbon.erb' %>
+</body>
+</html>

@@ -17,8 +17,7 @@
   <h1>Levels</h1>
   <% for level in @levels %>
     <div class="box">
-      <h2><%= level.label %></h2>
-      <p><a href="http://www.bbc.co.uk/education/levels/<%= level.id %>">Visit BBC Bitesize</a></p>
+      <h2><a href="/levels/<%= level.id %>"><%= level.label %></a></h2>
     </div>
   <% end %>
 
