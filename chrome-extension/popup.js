@@ -104,7 +104,36 @@ function openTab(newURL) {
 	chrome.tabs.create({ url: newURL });
 }
 
+function loadLevels( callback ) {
+  callback([{'label': 'KS1', 'id': 'ks1'}, {'label': 'KS2', 'id': 'ks2'}, {'label': 'Fish', 'id': 'fish'}]);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+
+  loadLevels( function(levels) {
+
+    var levelsDiv = document.getElementById('object');
+
+    for(var i = 0; i < levels.length; i++){
+
+      var levelBr = document.createElement('br');
+      var levelLabel = document.createElement('label');
+      var levelInput = document.createElement('input');
+      levelInput.type = 'radio';
+      levelInput.name = 'object';
+      levelInput.value = levels[i].id;
+      levelLabel.appendChild(levelInput);
+      levelLabel.appendChild(document.createTextNode(' ' + levels[i].label));
+      levelsDiv.appendChild(levelLabel);
+      levelsDiv.appendChild(levelBr);
+
+    }
+    renderStatus('Loaded ' + levels.length + ' level(s)');
+    
+  }, function(errorMessage) {
+    document.body.style.backgroundColor = "red";
+    renderStatus('Cannot load levels. ' + errorMessage);
+  });
 
   getCurrentTabDetails(function(url,title,favIconUrl) {
 
