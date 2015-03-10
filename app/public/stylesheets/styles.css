@@ -11,3 +11,4 @@ table td, table th {padding: 8px 16px;text-align: left}
 table td {border: 1px solid #34282c}
 tr:nth-child(even) td {background: #ddd}
 .box {padding: 8px 16px; background: #ddd; margin-right: 16px; margin-bottom: 16px;  width: 10em}
+.warn { color: red }

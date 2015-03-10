@@ -256,6 +256,17 @@ get '/relationships/by/subject/?' do
   end
 end
 
+delete '/relationships/:id' do
+
+  begin
+    Relationship.destroy(params[:id])
+    redirect '/relationships/latest/', 303
+  rescue Exception => e
+    error 400, 'Bad Request: ' + e.message
+    redirect '/relationships/' + rel.id.to_s
+  end
+end
+
 get '/relationships/:id' do
     @relationship = Relationship.find_by_id(params[:id])
     pass unless @relationship
