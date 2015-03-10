@@ -104,8 +104,31 @@ function openTab(newURL) {
 	chrome.tabs.create({ url: newURL });
 }
 
-function loadLevels( callback ) {
-  callback([{'label': 'KS1', 'id': 'ks1'}, {'label': 'KS2', 'id': 'ks2'}, {'label': 'Fish', 'id': 'fish'}]);
+function loadLevels( callback, errorCallback) {
+
+  var getUrl = API_URL + '/levels';
+  var x = new XMLHttpRequest();
+  x.open('GET', getUrl);
+  x.setRequestHeader ("Accept", "application/json");
+  x.responseType = 'json';
+  x.onload = function() {
+    var response = x.response;
+    
+    if (!response || !response.levels) {
+      errorCallback('No response from levels API!');
+      return;
+    }
+
+    var levels = response.levels;
+    callback(levels);
+  };
+  x.onerror = function(err) {
+    errorCallback('Network error.' + err.description);
+  };
+  x.send();
+
+	
+	//callback([{'label': 'KS1', 'id': 'ks1'}, {'label': 'KS2', 'id': 'ks2'}, {'label': 'Fish', 'id': 'fish'}]);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
