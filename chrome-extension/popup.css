@@ -1,8 +1,38 @@
-body { margin: 0px; }
+
+body {
+  margin: 0px;
+  font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+  font-size: 100%;
+  line-height: 1.5em
+}
 div { padding: 4px }
+#status {
+  /* avoid an excessively wide status text */
+  white-space: pre;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 400px
+}
+
+.dc img { float: left; margin-right: 8px; position: absolute }
+
+.cf:before,
+.cf:after { content: " "; display: table }
+.cf:after { clear: both }
+
+#subject-details { margin-bottom: 16px }
+#subject-title { font-weight: bold }
+#subject-url { font-size: x-small }
+
+#subject-image-fav-icon { position: relative; left: 8px; top: 16px; z-index: 1 }
+#subject-title { margin-left: 64px }
+#subject-url { margin-left: 64px }
+
+#tag-button { font-size: 2rem }
+
 .tip {
   padding-top: 8px;
   background-color: #ddd;
   font-size: 9px;
-  font-weight: bold;
+  font-weight: bold
 }
