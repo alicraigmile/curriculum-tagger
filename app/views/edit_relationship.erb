@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Relationship <%= @relationship.id %> | Edit details</title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+  <p><a href="/" title="API Docs | Curriculum Tagger"> Home</a></p>
+  <h1>Relationship <%= @relationship.id %></h1>
+  <p>Created: <%= @relationship.created_at %></p>
+  <p>Updated: <%= @relationship.updated_at %></p>
+  <hr>
+   <h3>Edit details</h3>
+<form action="/relationships/<%= @relationship.id %>" method="post">
+ <input type="hidden" name="_method" value="PUT">
+ <table>
+  <tbody>
+    <tr>
+      <th>Subject</th>
+      <td><input id="relationship-form-s-field" name="s" value="<%=h @relationship.subject %>"></td>
+    </tr>
+    <tr>
+      <th>Predicate</th>
+      <td><input id="relationship-form-p-field" name="p" value="<%=h @relationship.predicate %>">  </td>
+    </tr>
+    <tr>
+      <th>Object</th>
+      <td><input id="relationship-form-o-field" name="o" value="<%=h @relationship.object %>"></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td><input type="submit" name="" value="Save this relationship"></a></td>
+    </tr>
+  </tfoot>
+  </table>
+  </form>
+   <hr>
+   <h3>Advanced options</h3>
+    <form action="/relationships/<%= @relationship.id %>" method="post">
+  <div style="margin:0;padding:0">
+    <input name="_method" type="hidden" value="delete" />
+    <input type="submit" name="" value="Delete this relationship">
+    <span class="warn">Use with caution (permanent).</span>
+  </div>
+  </form>
+
+  <%= include 'github-ribbon.erb' %>
+</body>
+</html>

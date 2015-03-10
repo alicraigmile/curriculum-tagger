@@ -289,6 +289,28 @@ get '/relationships/:id' do
   end
 end
 
+put '/relationships/:id' do
+  rel = Relationship.find_by_id(params[:id])
+  pass unless rel
+  
+  rel.subject = params[:s]
+  rel.predicate = params[:p]
+  rel.object = params[:o]
+  begin
+    rel.save!
+    redirect '/relationships/' + rel.id.to_s
+  rescue Exception => e
+    error 400, 'Bad Request: ' + e.message
+  end
+    
+end
+
+get '/relationships/:id/edit' do
+    @relationship = Relationship.find_by_id(params[:id])
+    pass unless @relationship
+    erb :edit_relationship
+end
+
 post '/relationships/?' do
     rel = Relationship.new()
     rel.subject = params[:subject]

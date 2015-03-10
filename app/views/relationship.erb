@@ -19,6 +19,12 @@
   <p>Updated: <%= @relationship.updated_at %></p>
   <hr>
    <h3>Details</h3>
+  <form action="/relationships/<%= @relationship.id %>/edit" method="get">
+  <div style="margin:0;padding:0">
+    <input type="submit" name="" value="Edit">
+  </div>
+  </form>
+
  <table>
   <tbody>
     <tr>
@@ -35,15 +41,6 @@
     </tr>
   </tbody>
   </table>
-   <hr>
-   <h3>Options</h3>
-  <form action="/relationships/<%= @relationship.id %>" method="post">
-  <div style="margin:0;padding:0">
-    <input name="_method" type="hidden" value="delete" />
-    <input type="submit" name="" value="Delete this relationship">
-    <span class="warn">Use with caution (permanent).</span>
-  </div>
-  </form>
 
   <%= include 'github-ribbon.erb' %>
 </body>
