@@ -289,6 +289,13 @@ get '/relationships/:id' do
   end
 end
 
+
+get '/relationships/:id/edit' do
+    @relationship = Relationship.find_by_id(params[:id])
+    pass unless @relationship
+    erb :edit_relationship
+end
+
 post '/relationships/?' do
     rel = Relationship.new()
     rel.subject = params[:subject]

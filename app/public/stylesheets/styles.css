@@ -3,12 +3,21 @@ body {line-height: 1.5em;
 	color: #34282c}
 h1 {font-size: 1.4em}
 h2 {font-size: 1.3em}
-p, select {font-size: 1.1em}
-input {font-size: 0.8em}
+p, select,td {font-size: 1.1em}
+input {
+    clear: left;
+    overflow: auto;
+    font-size: 1.1em
+}
+
 #relationships-form-uri-field {width: 30em}
+#relationship-form-s-field {width: 30em}
+#relationship-form-p-field {width: 30em}
+#relationship-form-o-field {width: 30em}
 table {border-collapse: collapse}
-table td, table th {padding: 8px 16px;text-align: left}
-table td {border: 1px solid #34282c}
+td, th {padding: 8px 8px;text-align: left}
+tbody td {border: 1px solid #ddd}
 tr:nth-child(even) td {background: #ddd}
 .box {padding: 8px 16px; background: #ddd; margin-right: 16px; margin-bottom: 16px;  width: 10em}
 .warn { color: red }
+
