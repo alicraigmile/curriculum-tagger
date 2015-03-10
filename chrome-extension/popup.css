@@ -1,0 +1,8 @@
+body { margin: 0px; }
+div { padding: 4px }
+.tip {
+  padding-top: 8px;
+  background-color: #ddd;
+  font-size: 9px;
+  font-weight: bold;
+}

@@ -2,19 +2,30 @@
   "manifest_version": 2,
 
   "name": "Curriculum tagger",
-  "description": "This extension allows you to tag the current page as to how it maps to the UK Curricula.",
+  "description": "This extension allows you to save curriculum tags for the current page.",
   "version": "1.0",
 
   "browser_action": {
     "default_icon": "icon-tag.png",
     "default_popup": "popup.html",
-    "default_title": "Tag against the UK Curricula"
+    "default_title": "Save curriculum tags for this page"
   },
+
   "background": {
     "scripts": ["eventPage.js"],
     "persistent": false
   },
   
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "windows": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      }
+    }
+  },
+
   "permissions": [
     "tabs",
     "activeTab",
