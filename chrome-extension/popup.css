@@ -2,8 +2,13 @@
 body {
   margin: 0px;
   font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-  font-size: 100%;
-  line-height: 1.5em
+  font-size: 80%;
+  line-height: 1.5em;
+  width: 600px;
+}
+h2,h3 {
+	font-size: 0.8rem;
+	margin: 4px;
 }
 div { padding: 4px }
 #status {
@@ -11,24 +16,24 @@ div { padding: 4px }
   white-space: pre;
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 400px
 }
 
-.dc img { float: left; margin-right: 8px; position: absolute }
+label {  width: 190px; position: relative; float: left; margin-right: 4px;
+}
+.dc img { float: left; margin-right: 4px; position: absolute }
 
 .cf:before,
 .cf:after { content: " "; display: table }
 .cf:after { clear: both }
 
-#subject-details { margin-bottom: 16px }
 #subject-title { font-weight: bold }
 #subject-url { font-size: x-small }
 
-#subject-image-fav-icon { position: relative; left: 8px; top: 16px; z-index: 1 }
+#subject-image-fav-icon { position: relative; left: 4px; top: 8px; z-index: 1 }
 #subject-title { margin-left: 64px }
 #subject-url { margin-left: 64px }
 
-#tag-button { font-size: 2rem }
+#tag-button { font-size: 2rem;}
 
 .tip {
   padding-top: 8px;

@@ -139,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for(var i = 0; i < levels.length; i++){
 
-      var levelBr = document.createElement('br');
       var levelLabel = document.createElement('label');
       var levelInput = document.createElement('input');
       levelInput.type = 'radio';
@@ -148,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
       levelLabel.appendChild(levelInput);
       levelLabel.appendChild(document.createTextNode(' ' + levels[i].label));
       levelsDiv.appendChild(levelLabel);
-      levelsDiv.appendChild(levelBr);
 
     }
     renderStatus('Loaded ' + levels.length + ' level(s)');
@@ -202,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	    postRelationship(s, p, o, function(id) {
 	    console.log('id ' + id);
-	  	document.body.style.backgroundColor = "green";
+	  	document.body.style.backgroundColor = "#efe";
 	  	renderStatus('<a onClick="openTab(\''+API_URL+'/relationships/'+id + '\');">Tagged successfully!</a>');
 	  	chrome.browserAction.setIcon({path:"icon-tagged.png"});
 
