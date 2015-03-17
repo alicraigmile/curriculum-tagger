@@ -29,10 +29,11 @@
   <p><a href="/" title="API Docs | Curriculum Tagger"> Home</a></p>
   <h1>Relationships</h1>
   <% if @by %>
-  <form action="/relationships/by/<%= @by %>" method="get">
+  <form action="/relationships/by" method="get">
     <p>where
     <select id="relationships-form-uri-select" name="by">
     <option value="subject" <%if @by == 'subject'%>selected<% end %>>subject</option>
+    <option value="predicate" <%if @by == 'predicate'%>selected<% end %>>predicate</option>
     <option value="object" <%if @by == 'object'%>selected<% end %>>object</option>
     </select>
      = <input id="relationships-form-uri-field" type="text" name="uri" value="<%=h @uri %>"> <input type="submit" value="update" id="relationships-form-submit-button"></p>
@@ -65,7 +66,7 @@
     <tr>
       <td><a href="/relationships/<%= rel.id %>"><%= rel.id %></a></td>
       <td><a href="/relationships/by/subject/?uri=<%=u rel.subject %>" title="Relationships where the subject is '<%= rel.subject %>'"><%= rel.subject %></a></td>
-      <td><%= rel.predicate %></td>
+      <td><a href="/relationships/by/predicate/?uri=<%=u rel.predicate %>" title="Relationships where the predicate is '<%= rel.predicate %>'"><%= rel.predicate %></a></td>
       <td><a href="/relationships/by/object/?uri=<%=u rel.object %>" title="Relationships where the object is '<%= rel.object %>'"><%= rel.object %></a></td>
       <td>
         <form method="get" action="/relationships/<%= rel.id %>/edit">        

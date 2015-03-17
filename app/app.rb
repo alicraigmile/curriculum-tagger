@@ -213,7 +213,7 @@ get '/relationships/by/?' do
   @by = params[:by]
     
   pass unless @by
-  halt 400 unless ['subject','object'].include?(@by)
+  halt 400 unless ['subject','predicate','object'].include?(@by)
     
   redirect '/relationships/by/' + @by + '/?uri=' + u(params[:uri])
 end
@@ -222,7 +222,7 @@ end
 get '/relationships/by/:by/?' do  
   @by = params[:by]
 
-  halt 400 unless ['subject','object'].include?(@by)
+  halt 400 unless ['subject','predicate','object'].include?(@by)
   
   @relationships = Relationship.where(@by => params[:uri])
   @uri = params[:uri]
