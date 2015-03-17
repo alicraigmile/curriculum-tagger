@@ -211,11 +211,37 @@ end
 
 get '/relationships/by/?' do 
   @by = params[:by]
-    
-  pass unless @by
-  halt 400 unless ['subject','predicate','object'].include?(@by)
-    
-  redirect '/relationships/by/' + @by + '/?uri=' + u(params[:uri])
+   
+  #if ?by querystring exists and in non-empty the form is sending back a value
+    #for us to build a url from (seen next endpoint)
+  if @by && ! @by.empty?
+    halt 400 unless ['subject','predicate','object'].include?(@by)    
+    redirect '/relationships/by/' + @by + '/?uri=' + u(params[:uri])    
+  end
+
+  #otherwise we want to search by uri in '-any-' field
+  @uri = params[:uri]
+  halt 400 unless @uri
+  
+  @relationships = Relationship.where("subject = ? OR predicate = ? OR object = ?", @uri, @uri, @uri)
+
+  respond_to do |wants|
+     wants.json  {
+       content_type :json
+       {:relationships => @relationships}.to_json
+     }
+     wants.xml   {
+       content_type :xml
+       builder :relationships }
+     wants.html   {
+       content_type :html
+       erb :relationships  }
+     wants.other { 
+       content_type 'text/plain'
+       error 406, "Not Acceptable" 
+     }
+   end
+   
 end
 
 
@@ -368,6 +394,13 @@ helpers do
   end
   def u(text)
     Rack::Utils.escape(text)
+  end
+  def p(text)
+      if (text && !text.empty?)
+        '/' + text 
+      else
+        ''
+      end
   end
   def include(path)
     content = File.read(File.expand_path('views/' + path))

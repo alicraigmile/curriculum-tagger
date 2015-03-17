@@ -32,6 +32,7 @@
   <form action="/relationships/by" method="get">
     <p>where
     <select id="relationships-form-uri-select" name="by">
+    <option value="" <%if @by == ''%>selected<% end %>> -any- </option>
     <option value="subject" <%if @by == 'subject'%>selected<% end %>>subject</option>
     <option value="predicate" <%if @by == 'predicate'%>selected<% end %>>predicate</option>
     <option value="object" <%if @by == 'object'%>selected<% end %>>object</option>

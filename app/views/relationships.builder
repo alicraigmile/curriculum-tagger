@@ -12,17 +12,17 @@ xml.results :version => "1.0" do
       end
     end
   end
-  case @by
+  case @latest
   when nil
-    if @latest
+    if (@by || @uri)
       xml.alternates do
         xml.alternate do
           xml.format 'text/html'
-          xml.href '/relationships/latest.html?show=' + @show
+          xml.href '/relationships/by' + p(@by) +'.html?uri='  + u(@uri)
         end
         xml.alternate do
           xml.format 'application/json'
-          xml.href '/relationships/latest.json?show=' + @show
+          xml.href '/relationships/by/'+ p(@by) +'.json?uri=' + u(@uri)
         end
       end 
     else
@@ -41,11 +41,11 @@ xml.results :version => "1.0" do
     xml.alternates do
       xml.alternate do
         xml.format 'text/html'
-        xml.href '/relationships/by/'+ @by +'.html?uri='  + u(@uri)
+        xml.href '/relationships/latest.html?show=' + @show
       end
       xml.alternate do
         xml.format 'application/json'
-        xml.href '/relationships/by/'+ @by +'.json?uri=' + u(@uri)
+        xml.href '/relationships/latest.json?show=' + @show
       end
     end 
   end
