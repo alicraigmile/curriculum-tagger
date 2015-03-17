@@ -24,6 +24,12 @@
     <input type="submit" name="" value="Edit">
   </div>
   </form>
+  <form method="get" action="/relationships/new">        
+    <input type="hidden" name="s" value="<%=h @relationship.subject %>" />
+    <input type="hidden" name="p" value="<%=h @relationship.predicate %>" />
+    <input type="hidden" name="o" value="<%=h @relationship.object %>" />
+    <input type="submit" name="" value="Clone" />
+  </form>
 
  <table>
   <tbody>
