@@ -12,6 +12,7 @@ require 'rack/conneg'
 require 'posts'
 require 'levels'
 require 'images'
+require 'formats'
 require 'relationships'
 require 'subjects'
 
@@ -28,6 +29,51 @@ end
     
 get "/" do
     erb :apidocs
+end
+
+
+get '/formats/?' do
+  # matches "GET /formats
+  @formats = Format.all
+   
+  respond_to do |wants|
+    wants.json  {
+      content_type :json
+      {:formats => @formats}.to_json
+    }
+    wants.xml   {
+      content_type :xml
+      builder :formats }
+    wants.html   {
+      content_type :html
+      erb :formats }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+  end
+end
+
+get '/formats/:id' do
+  @format = Format.find_by(:id => params[:id])
+  pass unless @format
+    
+  respond_to do |wants|
+    wants.json  {
+      content_type :json
+      {:format => @format}.to_json
+    }
+    wants.xml   {
+      content_type :xml
+      builder :format }
+    wants.html   {
+      content_type :html
+      erb :format }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+  end
 end
 
 get '/hello' do
@@ -377,6 +423,7 @@ get '/subjects/:id' do
     }
   end
 end
+
 get "/version" do
     @version = `git rev-parse --short HEAD`
     erb :version, :content_type => 'text/plain'

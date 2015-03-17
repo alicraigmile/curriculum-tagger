@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @format.label %> | Curriculum Tagger</title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+<body>
+  <p><a href="/" title="API Docs | Curriculum Tagger"> Home</a></p>
+
+  <h1><%= @format.label %></h1>
+  <% if @format.description %>
+  <p><%= @format.description %></p>
+  <% else %>
+  <p>A content format.</p>
+  <% end %>
+  <hr>
+  <p><a href="/relationships/by/subject/?uri=<%=u @format.uri %>">Relationships where '<%= @format.label %>' is the subject</a></p>
+  <p><a href="/relationships/by/object/?uri=<%=u @format.uri %>">Relationships where '<%= @format.label %>' is the object</a></p>
+
+<%= include 'github-ribbon.erb' %>
+</body>
+</html>
