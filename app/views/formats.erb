@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formats | Curriculum Tagger</title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <link title="Levels in JSON"
+    type="application/json"
+    rel="alternate"
+    href="/formats.json">
+  <link title="Levels in XML"
+    type="application/xml"
+    rel="alternate"
+    href="/formats.xml">
+</head>
+<body>
+  <p><a href="/" title="API Docs | Curriculum Tagger"> Home</a></p>
+  <h1>Formats</h1>
+  <% for format in @formats %>
+    <div class="box">
+      <h2><a href="/formats/<%= format.id %>"><%= format.label %></a></h2>
+    </div>
+  <% end %>
+
+<%= include 'github-ribbon.erb' %>
+</body>
+</html>
