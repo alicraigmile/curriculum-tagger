@@ -5,7 +5,7 @@ xml.results :version => "1.0" do
       xml.subject do 
         xml.label subject.label
         xml.id subject.id
-        xml.href "/subjects/#{subject.id}"
+        xml.href "/subjects/#{subject.id}.xml"
         xml.bitesize_url "http://www.bbc.co.uk/education/subjects/#{subject.id}"
       end
     end
