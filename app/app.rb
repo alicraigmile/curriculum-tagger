@@ -13,6 +13,7 @@ require 'posts'
 require 'levels'
 require 'images'
 require 'relationships'
+require 'subjects'
 
 use(Rack::Conneg) { |conneg|
   conneg.set :accept_all_extensions, false
@@ -134,6 +135,7 @@ get '/levels/:id' do
     }
   end
 end
+
 
 get "/ping" do
     erb :ping, :content_type => 'text/plain'
@@ -332,6 +334,49 @@ post '/relationships/?' do
     end
 end
 
+get '/subjects/?' do
+  # matches "GET /subjects
+  @subjects = Subject.all
+   
+  respond_to do |wants|
+    wants.json  {
+      content_type :json
+      {:subjects => @subjects}.to_json
+    }
+    wants.xml   {
+      content_type :xml
+      builder :subjects }
+    wants.html   {
+      content_type :html
+      erb :subjects }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+  end
+end
+
+get '/subjects/:id' do
+  @subject = Subject.find_by(:id => params[:id])
+  pass unless @subject
+    
+  respond_to do |wants|
+    wants.json  {
+      content_type :json
+      {:subject => @subject}.to_json
+    }
+    wants.xml   {
+      content_type :xml
+      builder :subject }
+    wants.html   {
+      content_type :html
+      erb :subject }
+    wants.other { 
+      content_type 'text/plain'
+      error 406, "Not Acceptable" 
+    }
+  end
+end
 get "/version" do
     @version = `git rev-parse --short HEAD`
     erb :version, :content_type => 'text/plain'
