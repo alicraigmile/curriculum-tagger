@@ -254,16 +254,50 @@ get '/relationships/new' do
   erb :new_relationship
 end
 
-get '/relationships/by/object/?' do
-  @relationships = Relationship.where(:object => params[:uri])
-  @by = params[:by]
-  @uri = params[:uri]
 
-  if @by 
-    redirect '/relationships/by/' + @by + '/?uri=' + u(params[:uri])
+get '/relationships/by/?' do 
+  @by = params[:by]
+   
+  #if ?by querystring exists and in non-empty the form is sending back a value
+    #for us to build a url from (seen next endpoint)
+  if @by && ! @by.empty?
+    halt 400 unless ['subject','predicate','object'].include?(@by)    
+    redirect '/relationships/by/' + @by + '/?uri=' + u(params[:uri])    
   end
+
+  #otherwise we want to search by uri in '-any-' field
+  @uri = params[:uri]
+  halt 400 unless @uri
   
-  @by = 'object'
+  @relationships = Relationship.where("subject = ? OR predicate = ? OR object = ?", @uri, @uri, @uri)
+
+  respond_to do |wants|
+     wants.json  {
+       content_type :json
+       {:relationships => @relationships}.to_json
+     }
+     wants.xml   {
+       content_type :xml
+       builder :relationships }
+     wants.html   {
+       content_type :html
+       erb :relationships  }
+     wants.other { 
+       content_type 'text/plain'
+       error 406, "Not Acceptable" 
+     }
+   end
+   
+end
+
+
+get '/relationships/by/:by/?' do  
+  @by = params[:by]
+
+  halt 400 unless ['subject','predicate','object'].include?(@by)
+  
+  @relationships = Relationship.where(@by => params[:uri])
+  @uri = params[:uri]
     
   respond_to do |wants|
     wants.json  {
@@ -283,34 +317,6 @@ get '/relationships/by/object/?' do
   end
 end
 
-get '/relationships/by/subject/?' do
-  @relationships = Relationship.where(:subject => params[:uri])
-  @by = params[:by]
-  @uri = params[:uri]
-
-  if @by 
-    redirect '/relationships/by/' + @by + '/?uri=' + u(params[:uri])
-  end
-  
-  @by = 'subject'
-  
-  respond_to do |wants|
-    wants.json  {
-      content_type :json
-      {:relationships => @relationships}.to_json
-    }
-    wants.xml   {
-      content_type :xml
-      builder :relationships }
-    wants.html   {
-      content_type :html
-      erb :relationships  }
-    wants.other { 
-      content_type 'text/plain'
-      error 406, "Not Acceptable" 
-    }
-  end
-end
 
 delete '/relationships/:id' do
 
@@ -436,6 +442,13 @@ helpers do
   def u(text)
     Rack::Utils.escape(text)
   end
+  def p(text)
+      if (text && !text.empty?)
+        '/' + text 
+      else
+        ''
+      end
+  end
   def include(path)
     content = File.read(File.expand_path('views/' + path))
     t = ERB.new(content)
@@ -446,4 +459,9 @@ end
 not_found do
   status 404
   erb :oops
+end
+
+
+error 400 do
+  erb :bad_request
 end

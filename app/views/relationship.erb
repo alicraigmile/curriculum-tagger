@@ -39,7 +39,7 @@
     </tr>
     <tr>
       <th>Predicate</th>
-      <td><%= @relationship.predicate %></td>
+      <td><a href="/relationships/by/predicate/?uri=<%=u @relationship.predicate %>" title="Relationships where the predicate is '<%= @relationship.predicate %>'"><%= @relationship.predicate %></a></td>
     </tr>
     <tr>
       <th>Object</th>
