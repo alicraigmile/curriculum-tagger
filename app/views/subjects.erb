@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Subjects</title>
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <link title="Levels in JSON"
+    type="application/json"
+    rel="alternate"
+    href="/subjects.json">
+  <link title="Levels in XML"
+    type="application/xml"
+    rel="alternate"
+    href="/subjects.xml">
+</head>
+<body>
+  <p><a href="/" title="API Docs | Curriculum Tagger"> Home</a></p>
+  <h1>Subjects</h1>
+  <% for subject in @subjects %>
+    <div class="box">
+      <h2><a href="/subjects/<%= subject.id %>"><%= subject.label %></a></h2>
+    </div>
+  <% end %>
+
+<%= include 'github-ribbon.erb' %>
+</body>
+</html>
