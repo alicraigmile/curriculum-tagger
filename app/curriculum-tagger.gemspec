@@ -15,12 +15,11 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
   s.executables = ["curriculum-tagger"]
 
-  s.add_dependency 'sinatra'
-  s.add_dependency 'activerecord'
-  s.add_dependency 'sqlite3'
-  s.add_dependency 'builder'
-  s.add_dependency 'json'
+  s.add_dependency 'sinatra', '>=1.4.5'
+  s.add_dependency 'activerecord', '>=4.2.1'
+  s.add_dependency 'sqlite3', '>=1.3.10'
+  s.add_dependency 'builder', '>=3.2.2'
+  s.add_dependency 'json', '>=1.1.7'
   s.add_dependency 'rack-conneg', '>=0.1.5'
-  s.add_dependency 'git-version-bump'
   s.add_dependency 'i18n', '>=0.7.0'
 end

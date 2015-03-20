@@ -3,7 +3,7 @@ require 'active_record'
 
 ActiveRecord::Base.establish_connection(
   :adapter => 'sqlite3',
-  :database =>  'curriculum-data.sqlite3.db'
+  :database =>  File.join(File.dirname(__FILE__),'../../curriculum-data.sqlite3.db')
 )
 
 module CurriculumTagger

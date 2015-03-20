@@ -1,8 +1,7 @@
 require 'rubygems'
 require 'git-version-bump'
-#libs = File.expand_path("vendor/bundle/gems/**/lib", __FILE__)
-#$LOAD_PATH.unshift *Dir.glob(libs)
-#$LOAD_PATH.unshift File.dirname(__FILE__) + '/lib'
+libs = File.expand_path("vendor/bundle/gems/**/lib", __FILE__)
+$LOAD_PATH.unshift *Dir.glob(libs)
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/'
 
 $show_x_latest_relationships = 10
@@ -25,6 +24,8 @@ use(Rack::Conneg) { |conneg|
   conneg.ignore_contents_of(File.join(File.dirname(__FILE__),'../public'))
   conneg.provide([:json, :xml, :html, :text])
 }
+
+set :root, File.join(File.dirname(__FILE__),'../')
  
 before do
   headers['Access-Control-Allow-Origin'] = '*'
@@ -464,7 +465,7 @@ helpers do
       end
   end
   def include(path)
-    content = File.read(File.expand_path('views/' + path))
+    content = File.read(File.expand_path(File.join(File.dirname(__FILE__), '../views/' + path)))
     t = ERB.new(content)
     t.result(binding)
   end
