@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+module CurriculumTagger
+
 class Subject
   attr_accessor :label, :id, :description
 
@@ -84,4 +86,4 @@ class Subject
   
 end
 
-
+end

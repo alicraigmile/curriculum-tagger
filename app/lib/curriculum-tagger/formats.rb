@@ -1,3 +1,5 @@
+module CurriculumTagger
+ 
 class Format
   attr_accessor :label, :id, :description
 
@@ -37,4 +39,4 @@ class Format
   
 end
 
-
+end

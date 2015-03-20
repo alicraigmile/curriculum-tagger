@@ -5,8 +5,10 @@ ActiveRecord::Base.establish_connection(
   :database =>  'curriculum-data.sqlite3.db'
 )
 
-class Relationship < ActiveRecord::Base
-  validates :subject, :predicate, :object, presence: true
+module CurriculumTagger
+
+class Post < ActiveRecord::Base
 end
 
+end
 

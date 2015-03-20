@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+module CurriculumTagger
+
 class Level
   attr_accessor :label, :id, :description
 
@@ -36,4 +38,4 @@ class Level
   
 end
 
-
+end

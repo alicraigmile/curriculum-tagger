@@ -1,7 +1,9 @@
 require 'rubygems'
-libs = File.expand_path("vendor/bundle/gems/**/lib", __FILE__)
-$LOAD_PATH.unshift *Dir.glob(libs)
-$LOAD_PATH.unshift File.dirname(__FILE__) + '/lib'
+require 'git-version-bump'
+#libs = File.expand_path("vendor/bundle/gems/**/lib", __FILE__)
+#$LOAD_PATH.unshift *Dir.glob(libs)
+#$LOAD_PATH.unshift File.dirname(__FILE__) + '/lib'
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/'
 
 $show_x_latest_relationships = 10
 
@@ -9,17 +11,18 @@ require 'sinatra'
 require 'builder'
 require 'rack/conneg'
 
-require 'posts'
-require 'levels'
-require 'images'
-require 'formats'
-require 'relationships'
-require 'subjects'
+require 'curriculum-tagger/posts'
+require 'curriculum-tagger/levels'
+require 'curriculum-tagger/images'
+require 'curriculum-tagger/formats'
+require 'curriculum-tagger/relationships'
+require 'curriculum-tagger/subjects'
+require 'curriculum-tagger/version'
 
 use(Rack::Conneg) { |conneg|
   conneg.set :accept_all_extensions, false
   conneg.set :fallback, :html
-  conneg.ignore_contents_of(File.join(File.dirname(__FILE__),'public'))
+  conneg.ignore_contents_of(File.join(File.dirname(__FILE__),'../public'))
   conneg.provide([:json, :xml, :html, :text])
 }
  
@@ -34,7 +37,7 @@ end
 
 get '/formats/?' do
   # matches "GET /formats
-  @formats = Format.all
+  @formats = CurriculumTagger::Format.all
    
   respond_to do |wants|
     wants.json  {
@@ -55,7 +58,7 @@ get '/formats/?' do
 end
 
 get '/formats/:id' do
-  @format = Format.find_by(:id => params[:id])
+  @format = CurriculumTagger::Format.find_by(:id => params[:id])
   pass unless @format
     
   respond_to do |wants|
@@ -94,7 +97,7 @@ end
 
 get '/images/?' do
   # matches "GET /images"
-  @images = Image.all()
+  @images = CurriculumTagger::Image.all()
     
   respond_to do |wants|
     wants.json  {
@@ -116,7 +119,7 @@ end
 
 get '/images/search' do
   # matches "GET /images/search?q=volcanos"
-  @images = Image.find(:title => params['q'])
+  @images = CurriculumTagger::Image.find(:title => params['q'])
   @query = params['q']
     
   respond_to do |wants|
@@ -139,7 +142,7 @@ end
 
 get '/levels/?' do
   # matches "GET /levels"
-  @levels = Level.all
+  @levels = CurriculumTagger::Level.all
     
   respond_to do |wants|
     wants.json  {
@@ -160,7 +163,7 @@ get '/levels/?' do
 end
 
 get '/levels/:id' do
-  @level = Level.find_by(:id => params[:id])
+  @level = CurriculumTagger::Level.find_by(:id => params[:id])
   pass unless @level
     
   respond_to do |wants|
@@ -187,18 +190,18 @@ get "/ping" do
 end
 
 get '/posts/?' do
-    @posts = Post.all()
+    @posts = CurriculumTagger::Post.all()
     erb :posts
 end
 
 get '/posts/:id' do
-    @post = Post.find_by(:id => params[:id])
+    @post = CurriculumTagger::Post.find_by(:id => params[:id])
     pass unless @post
     erb :post
 end
 
 get '/relationships/?' do
-  @relationships = Relationship.all()
+  @relationships = CurriculumTagger::Relationship.all()
    
   respond_to do |wants|
     wants.json  {
@@ -222,7 +225,7 @@ end
 get '/relationships/latest/?' do
   show = params[:show] ||= $show_x_latest_relationships
   
-  @relationships = Relationship.last(show).reverse
+  @relationships = CurriculumTagger::Relationship.last(show).reverse
   @latest = true
   @show = show #how many did we ask to return
   @count = @relationships.length #how many did we actually return
@@ -268,7 +271,7 @@ get '/relationships/by/?' do
   @uri = params[:uri]
   halt 400 unless @uri
   
-  @relationships = Relationship.where("subject = ? OR predicate = ? OR object = ?", @uri, @uri, @uri)
+  @relationships = CurriculumTagger::Relationship.where("subject = ? OR predicate = ? OR object = ?", @uri, @uri, @uri)
 
   respond_to do |wants|
      wants.json  {
@@ -295,7 +298,7 @@ get '/relationships/by/:by/?' do
 
   halt 400 unless ['subject','predicate','object'].include?(@by)
   
-  @relationships = Relationship.where(@by => params[:uri])
+  @relationships = CurriculumTagger::Relationship.where(@by => params[:uri])
   @uri = params[:uri]
     
   respond_to do |wants|
@@ -320,7 +323,7 @@ end
 delete '/relationships/:id' do
 
   begin
-    Relationship.destroy(params[:id])
+    CurriculumTagger::Relationship.destroy(params[:id])
     redirect '/relationships/latest/', 303
   rescue Exception => e
     error 400, 'Bad Request: ' + e.message
@@ -329,7 +332,7 @@ delete '/relationships/:id' do
 end
 
 get '/relationships/:id' do
-    @relationship = Relationship.find_by_id(params[:id])
+    @relationship = CurriculumTagger::Relationship.find_by_id(params[:id])
     pass unless @relationship
     
   respond_to do |wants|
@@ -351,7 +354,7 @@ get '/relationships/:id' do
 end
 
 put '/relationships/:id' do
-  rel = Relationship.find_by_id(params[:id])
+  rel = CurriculumTagger::Relationship.find_by_id(params[:id])
   pass unless rel
   
   rel.subject = params[:s]
@@ -367,13 +370,13 @@ put '/relationships/:id' do
 end
 
 get '/relationships/:id/edit' do
-    @relationship = Relationship.find_by_id(params[:id])
+    @relationship = CurriculumTagger::Relationship.find_by_id(params[:id])
     pass unless @relationship
     erb :edit_relationship
 end
 
 post '/relationships/?' do
-    rel = Relationship.new()
+    rel = CurriculumTagger::Relationship.new()
     rel.subject = params[:s]
     rel.predicate = params[:p]
     rel.object = params[:o]
@@ -387,7 +390,7 @@ end
 
 get '/subjects/?' do
   # matches "GET /subjects
-  @subjects = Subject.all
+  @subjects = CurriculumTagger::Subject.all
    
   respond_to do |wants|
     wants.json  {
@@ -408,7 +411,7 @@ get '/subjects/?' do
 end
 
 get '/subjects/:id' do
-  @subject = Subject.find_by(:id => params[:id])
+  @subject = CurriculumTagger::Subject.find_by(:id => params[:id])
   pass unless @subject
     
   respond_to do |wants|
@@ -430,8 +433,20 @@ get '/subjects/:id' do
 end
 
 get "/version" do
-    @version = `git rev-parse --short HEAD`
-    erb :version, :content_type => 'text/plain'
+  @version = CurriculumTagger::VERSION
+    
+  respond_to do |wants|
+    wants.json  {
+      content_type :json
+      {:version => @version}.to_json
+    }
+    wants.xml   {
+      content_type :xml
+      builder :version }
+    wants.other { 
+      erb :version, :content_type => 'text/plain'
+    }
+  end  
 end
 
 helpers do
