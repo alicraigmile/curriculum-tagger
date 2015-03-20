@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Subject
   attr_accessor :label, :id, :description
 
