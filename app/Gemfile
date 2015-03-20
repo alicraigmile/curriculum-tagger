@@ -1,9 +1,11 @@
 source 'http://rubygems.org/'
-ruby '1.9.3'
+#ruby '1.9.3'
 
 gem 'sinatra' 
 gem 'activerecord'
-gem 'sqlite3'0
+gem 'sqlite3'
 gem 'builder'
 gem 'json'
 gem 'rack-conneg', '>=0.1.5'
+gem 'git-version-bump'
+gem 'i18n', '>=0.7.0'

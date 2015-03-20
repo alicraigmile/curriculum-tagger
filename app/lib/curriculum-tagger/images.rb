@@ -1,3 +1,5 @@
+module CurriculumTagger
+  
 class Image
   attr_accessor :url, :width, :height, :title
 
@@ -25,4 +27,4 @@ class Image
   end  
 end
 
-
+end
