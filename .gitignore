@@ -1,7 +1,6 @@
 app/*.sqlite3.db
 app/Gemfile.lock
 app/vendor
-app/bin
 .DS_Store
 .settings
 .project

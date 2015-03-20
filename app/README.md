@@ -7,20 +7,23 @@ Curriculum Tagger is a RESTful web API. It's built on top of the Sinatra framewo
 ### Setup
 
 ``` bash
-./setup.sh
+$ setup-curriculum-tagger
 ```
 
-### To run on a dedicated port
+### Starting from the command line
 
 ``` bash
-./run.sh
+$ curriculum-tagger
 ```
 
-Note: ^C to quit
-
-### Testing
-
 If the application started properly, you should see 'ok' when you visit [http://localhost:9292/ping](http://localhost:9292/ping).
+
+### Starting from Apache w/ Passenger
+
+``` bash
+$ ln -s httpd.conf /etc/httpd/conf.d/curriculum.xgusties.com.conf
+$ service httpd restart
+```
 
 ### Usage / Getting Started
 
