@@ -1,10 +1,9 @@
 source 'http://rubygems.org/'
+ruby '1.9.3'
 
 gem 'sinatra' 
 gem 'activerecord'
-gem 'sqlite3'
-gem '4store-ruby', :git => 'https://github.com/moustaki/4store-ruby'
-gem 'builder'         #for XML views
-gem 'json'            #for JSON views
-gem 'rack'
-gem 'rack-conneg', :git => 'https://github.com/md5/rack-conneg'
+gem 'sqlite3'0
+gem 'builder'
+gem 'json'
+gem 'rack-conneg', '>=0.1.5'

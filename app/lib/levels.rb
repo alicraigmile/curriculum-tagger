@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Level
   attr_accessor :label, :id, :description
 

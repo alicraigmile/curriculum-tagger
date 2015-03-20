@@ -10,8 +10,8 @@ class Image
   
   def self.all ()
     [
-        Image.new('http://localhost:9292/images/document.svg',48, 56, 'Document'),
-        Image.new('http://localhost:9292/images/document.svg', 38, 46, 'Small document')
+        Image.new('/images/document.svg',48, 56, 'Document'),
+        Image.new('/images/document.svg', 38, 46, 'Small document')
     ]
   end
 
@@ -19,7 +19,7 @@ class Image
   #find (:title => '~document')
   def self.find ( query )
     [
-      Image.new('http://localhost:9292/images/document.svg',48, 56, 'Document')
+      Image.new('/images/document.svg',48, 56, 'Document')
     ]      
 #    Image.all().any?{|a| a.title == 'Document'}
   end  
