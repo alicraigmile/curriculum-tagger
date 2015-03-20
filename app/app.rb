@@ -116,7 +116,6 @@ end
 
 get '/images/search' do
   # matches "GET /images/search?q=volcanos"
-  #@images = {:responseData => {:results => [{:tbWidth => 56, :tbHeight => 48, :tbUrl => 'http://localhost:9292/images/document.svg'}]}}
   @images = Image.find(:title => params['q'])
   @query = params['q']
     
