@@ -1,0 +1,28 @@
+a_post:
+  id:     1
+  title:  A post
+  body:   Blah...
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
+  
+another_post:
+  id:     2
+  title:  Another post
+  body:   Foo bar. Farp.
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  
+a_third_post:
+  id:     3
+  title:  A third post
+  body:   Blah...
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
+four:
+  id:     4
+  title:  Browse by subject
+  body:   Fundamental to the success of Bitesize is the Curriculum ontology.
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>

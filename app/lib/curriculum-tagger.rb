@@ -10,6 +10,7 @@ $show_x_latest_relationships = 10
 require 'sinatra'
 require 'builder'
 require 'rack/conneg'
+require "sinatra/activerecord"
 
 require 'curriculum-tagger/posts'
 require 'curriculum-tagger/levels'
@@ -18,6 +19,8 @@ require 'curriculum-tagger/formats'
 require 'curriculum-tagger/relationships'
 require 'curriculum-tagger/subjects'
 require 'curriculum-tagger/version'
+
+set :database_file, File.dirname(__FILE__) + '/../config/database.yml'
 
 use(Rack::Conneg) { |conneg|
   conneg.set :accept_all_extensions, false

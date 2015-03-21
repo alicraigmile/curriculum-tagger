@@ -1,0 +1,23 @@
+a:
+  id:         1
+  subject:    http://www.bbc.co.uk/
+  predicate:  urn:rel:a
+  object:     urn:type:Website
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
+b:
+  id:         2
+  subject:    http://www.bbc.co.uk/news
+  predicate:  a
+  object:     /format/index
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
+c:
+  id:         3
+  subject:    http://www.bbc.co.uk/
+  predicate:  mentions
+  object:     http://www.bbc.co.uk/news
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
