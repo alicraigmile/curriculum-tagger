@@ -391,6 +391,13 @@ post '/relationships/?' do
     end
 end
 
+get '/status' do
+  @environment = settings.environment
+
+  content_type 'text/plain'
+  'env: ' + @environment.to_s
+end
+
 get '/subjects/?' do
   # matches "GET /subjects
   @subjects = CurriculumTagger::Subject.all
